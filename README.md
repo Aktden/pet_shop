@@ -21,3 +21,35 @@
    ```bash
    git clone [https://github.com/Aktden/pet_shop.git]
    cd pet_shop
+2.  **Установите необходимые библиотеки:**
+```
+pip install fastapi uvicorn sqlalchemy pydantic
+
+Запустите сервер:
+uvicorn main:app --reload
+
+Интерактивная документация:
+После запуска API доступно по адресу: http://127.0.0.1:8000/docs (Swagger UI).
+```
+##  Эндпоинты API
+
+| Метод | Путь | Описание |
+|:---:|:---|:---|
+| **POST** | `/products` | Создать новый товар (проверка на уникальность имени). |
+| **GET** | `/products` | Список товаров с фильтрами по `min_price`, `max_price` и `in_stock`. |
+| **GET** | `/products/{id}` | Получить детальную информацию о товаре по ID. |
+| **PUT** | `/products/{id}` | Полное обновление данных существующего товара. |
+| **DELETE** | `/products/{id}` | Удаление товара из базы данных. |
+
+## Архитектура 
+
+```
+pet_shop_project/
+├── main.py          # Инициализация API и роуты
+├── database.py      # Настройка движка и сессии БД
+├── models.py        # SQLAlchemy-модели (структура таблиц)
+├── schemas.py       # Pydantic-модели (валидация данных)
+├── crud.py          # Функции для работы с данными в БД
+├── requirements.txt # Список зависимостей
+└── pet_shop.db      # Сама база данных (появится после запуска)
+```
